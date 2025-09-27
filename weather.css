@@ -2,7 +2,43 @@
     margin: 0;
     padding: 0;
 }
-body{
+.box{
+    
+    background-color: #d7f9ff;
+    height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.hour,.temperature,.humidity,.wind-speed{
+    
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 1rem;
+}
+.hourly,.temp,.humidi,.windi{
+    margin-right: 0.5rem;
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: center;
+    border-radius: 0.75rem;
+    border: none;
+    align-items: center;
+    height: 4rem;
+    width: 6rem;
+    border: 1px solid lightgray;
+}
+.container{
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #afcbff;
+
+}
+/* .b2{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,14 +47,14 @@ body{
     
 
     
-}
+} */
 
 .weather-background{
     height: 100px;
 }
 .weather-container{
     background-color: #d7f9ff;
-    height: 78vh;
+    height: 84vh;
     width: 50vh;
     border: 1px solid black;
     border-radius: 0.75rem;
@@ -93,19 +129,53 @@ input{
     width: 100%;
     display: flex;
     margin-top: 1rem;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 .weather-update p{
     font-size: 2rem;
 }
-button{
+.live-button{
 
     height: 3rem;
     border: 1px solid lightgray;
     border-radius: 0.75rem;
-    margin-left: 2rem;
+    margin-left: 4.9rem;
     padding: 0.75rem;
     margin-top: 0.8rem;
     font-size: 1rem;
     font-weight: 100;
+    cursor: pointer;
+}
+.hide{
+    display: none;
+}
+.next-btn{
+    cursor: pointer;
+    height: 3rem;
+    border: 1px solid lightgray;
+    border-radius: 0.75rem;
+    margin-left: 5.2rem;
+    padding: 0.75rem;
+    margin-top: 0.8rem;
+    font-size: 1rem;
+    font-weight: 100;
+    
+
+}
+.hideMore{
+    display: none;
+}
+.getnewlocation{
+    cursor: pointer;
+    height: 3rem;
+    border: 1px solid lightgray;
+    border-radius: 0.75rem;
+    margin-left: 5.2rem;
+    padding: 0.75rem;
+    margin-top: 5rem;
+    font-size: 1rem;
+    font-weight: 100;
+    background-color: teal;
+    
+
 }

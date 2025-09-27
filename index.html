@@ -7,41 +7,125 @@
     <link rel="stylesheet" href="weather.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+
+
+<body >
+
+    <div class="box hideMore">
+
+        <h1>Get Next 12 Hrs weather update</h1>
+        <h2>Upcoming 12 hrs</h2>
+        <div class="hour">
+        <div class="hourly"></div>
+        <div class="hourly"></div>
+        <div class="hourly"></div>
+        <div class="hourly"></div>
+        <div class="hourly"></div>
+        <div class="hourly"></div>
+        <div class="hourly"></div>
+        <div class="hourly"></div>
+        <div class="hourly"></div>
+        <div class="hourly"></div>
+        <div class="hourly"></div>
+        <div class="hourly"></div>
+        <div class="hourly"></div>
+        
+        </div>
+        <h2>Upcoming 12 Hrs Temperature for your Location</h2>
+        <div class="temperature">
+        <div class="temp"></div>
+        <div class="temp"></div>
+        <div class="temp"></div>
+        <div class="temp"></div>
+        <div class="temp"></div>
+        <div class="temp"></div>
+        <div class="temp"></div>
+        <div class="temp"></div>
+        <div class="temp"></div>
+        <div class="temp"></div>
+        <div class="temp"></div>
+        <div class="temp"></div>
+        <div class="temp"></div>
+        
+        </div>
+        <h2>Upcoming 12 hrs Humidity for your Location</h2>
+        <div class="humidity">
+            <div class="humidi"></div>
+             <div class="humidi"></div>
+              <div class="humidi"></div>
+               <div class="humidi"></div>
+                <div class="humidi"></div>
+                 <div class="humidi"></div>
+             <div class="humidi"></div>
+              <div class="humidi"></div>
+               <div class="humidi"></div>
+                <div class="humidi"></div>
+                 <div class="humidi"></div>
+             <div class="humidi"></div>
+              <div class="humidi"></div>
+               
+        </div>
+        <h2>Upcoming 12 hrs wind speed for your Location</h2>
+        <div class="wind-speed">
+            <div class="windi"></div>
+            <div class="windi"></div>
+            <div class="windi"></div>
+            <div class="windi"></div>
+            <div class="windi"></div>
+            <div class="windi"></div>
+            <div class="windi"></div>
+            <div class="windi"></div>
+            <div class="windi"></div>
+            <div class="windi"></div>
+            <div class="windi"></div>
+            <div class="windi"></div>
+             <div class="windi"></div>
+            
+
+        </div>
+
+        <button class="getnewlocation "> Enter new Location</button>
+    </div>
     
-    <div class="weather-container">
+
+    <div class="container  ">
+    <div class="weather-container ">
         <form action="/getWeather-status" method="post">
             
             <div class="select-input">
                 <div class="lati" >
                 <p>Location latitude</p>
-                <input class="input" type="number" value="2" step="any" >
+                <input class="input" type="number" value="" step="any" >
                 </div>
                 <div class="long" >
                       <p>Location longitude</p>
                 
-                <input type="number" value="1">
+                <input type="number" value="" step="any">
                 </div>
                  </div>
 
-            <i class="fa-solid fa-magnifying-glass"></i>
+            
 
 
             
             <div class="weather-update">
                 <img class="weather-background" src="weather-background-photo.jpg" alt="">
                  <h1>22<sup>o</sup>C</h1>
-                 <p class="city-name">New York</p>
+                 
             </div>
             <div class="more-info-weather">
                 <p class="humid">64% Humidity</p>
                 <p class="wind">18Km/hr Wind</p>
                 
             </div>
-            <button>Get Today's Live Weather</button>
+            <button class="live-button">Get Today's Live Weather</button>
+            <button class="next-btn">Get Next 12 hrs weather</button>
+
+            <button></button>
             </form>
 
            
+            </div>
             </div>
 
            
