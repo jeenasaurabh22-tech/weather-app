@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="weather.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    
+    <div class="weather-container">
+        <form action="/getWeather-status" method="post">
+            
+            <div class="select-input">
+                <div class="lati" >
+                <p>Location latitude</p>
+                <input class="input" type="number" value="2" step="any" >
+                </div>
+                <div class="long" >
+                      <p>Location longitude</p>
+                
+                <input type="number" value="1">
+                </div>
+                 </div>
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+
+            
+            <div class="weather-update">
+                <img class="weather-background" src="weather-background-photo.jpg" alt="">
+                 <h1>22<sup>o</sup>C</h1>
+                 <p class="city-name">New York</p>
+            </div>
+            <div class="more-info-weather">
+                <p class="humid">64% Humidity</p>
+                <p class="wind">18Km/hr Wind</p>
+                
+            </div>
+            <button>Get Today's Live Weather</button>
+            </form>
+
+           
+            </div>
+
+           
+            
+
+        
+
+    <script src="weather.js"></script>
+</body>
+</html>
