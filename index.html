@@ -6,7 +6,7 @@
     <title>Weather App</title>
     <link rel="stylesheet" href="weather.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Leaflet CSS for map -->
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 </head>
 
@@ -146,7 +146,7 @@
         <div class="weather-container">
             <form action="/getWeather-status" method="post">
                 
-                <!-- Current Date and Time -->
+      
                 <div class="datetime-display">
                     <div class="date-info">
                         <i class="fas fa-calendar-alt"></i>
@@ -158,7 +158,7 @@
                     </div>
                 </div>
                 
-                <!-- Current Location Display -->
+             
                 <div class="current-location-display">
                     <div class="location-info">
                         <i class="fas fa-map-marker-alt"></i>
@@ -172,7 +172,7 @@
                     </button>
                 </div>
                 
-                <!-- Main Weather Card -->
+              
                 <div class="main-weather-card">
                     <div class="weather-icon-large">
                         <i class="fas fa-cloud-sun"></i>
@@ -226,7 +226,6 @@
                     </div>
                 </div>
                 
-                <!-- Action Buttons -->
                 <div class="action-buttons">
                     <button class="live-button" type="button">
                         <i class="fas fa-sync-alt"></i> Refresh Weather
@@ -240,7 +239,7 @@
         </div>
     </div>
 
-    <!-- Map Modal -->
+
     <div id="mapModal" class="map-modal">
         <div class="map-modal-content">
             <div class="map-modal-header">
@@ -272,7 +271,6 @@
         </div>
     </div>
 
-    <!-- Warning Modal -->
     <div id="warningModal" class="warning-modal">
         <div class="warning-modal-content">
             <div class="warning-icon">
@@ -294,8 +292,7 @@
            
             
 
-        
-    <!-- Leaflet JS for map -->
+  
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script src="weather.js"></script>
 </body>

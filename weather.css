@@ -42,7 +42,6 @@ body::after {
     z-index: -2;
 }
 
-/* Animated particles effect */
 @keyframes particles {
     0%, 100% { 
         transform: translateY(0px) translateX(0px);
@@ -120,7 +119,6 @@ body::after {
     letter-spacing: 0.5px;
 }
 
-/* Modern Forecast Cards */
 .forecast-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -312,7 +310,6 @@ body::after {
     }
 }
 
-/* Main Weather Card */
 .main-weather-card {
     width: 100%;
     display: flex;
@@ -334,7 +331,6 @@ body::after {
     50% { transform: translateY(-15px); }
 }
 
-/* Date and Time Display */
 .datetime-display {
     width: 100%;
     display: flex;
@@ -372,7 +368,6 @@ body::after {
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Current Location Display */
 .current-location-display {
     width: 100%;
     background: rgba(255, 255, 255, 0.18);
@@ -481,7 +476,6 @@ body::after {
     font-size: 1.2rem;
 }
 
-/* Map Modal */
 .map-modal{
     display: none;
     position: fixed;
@@ -638,7 +632,6 @@ body::after {
     border-bottom: none;
 }
 
-/* Scrollbar styling */
 .search-results::-webkit-scrollbar{
     width: 6px;
 }
@@ -711,7 +704,6 @@ body::after {
     box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .weather-container{
         width: 95%;
@@ -833,7 +825,6 @@ body::after {
     }
 }
 
-/* Animation for cards */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -895,7 +886,6 @@ body::after {
     display: none;
 }
 
-/* Weather Stats Grid */
 .weather-stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -975,7 +965,6 @@ body::after {
     margin: 0;
 }
 
-/* Action Buttons Container */
 .action-buttons {
     display: flex;
     gap: 1rem;
@@ -1075,7 +1064,6 @@ body::after {
     border-color: rgba(102, 126, 234, 0.8);
 }
 
-/* Warning Modal */
 .warning-modal {
     display: none;
     position: fixed;

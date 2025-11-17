@@ -1,9 +1,7 @@
-// API URLs
 const base_URL = "https://api.open-meteo.com";
 const live_URL = "https://api.openweathermap.org/data/2.5/weather?";
 const GEOCODING_URL = "https://nominatim.openstreetmap.org/search";
 
-// Get DOM elements
 const box = document.querySelector(".box");
 const container = document.querySelector(".container");
 const forecastCards = document.querySelectorAll(".forecast-card");
@@ -14,7 +12,6 @@ const msg_wind = document.querySelector(".wind");
 const msg_temp = document.querySelector(".weather-update h1");
 const btn3 = document.querySelector(".getnewlocation");
 
-// Map Modal elements
 const changeLocationBtn = document.querySelector(".change-location-btn");
 const mapModal = document.getElementById("mapModal");
 const closeModal = document.querySelector(".close-modal");
@@ -25,21 +22,17 @@ const displayLat = document.getElementById("displayLat");
 const displayLon = document.getElementById("displayLon");
 const selectedLocationText = document.getElementById("selectedLocation");
 
-// Home page location display elements
 const currentLocationName = document.getElementById("currentLocationName");
 const currentLatDisplay = document.getElementById("currentLat");
 const currentLonDisplay = document.getElementById("currentLon");
 
-// Date and time elements
 const currentDateDisplay = document.getElementById("currentDate");
 const currentTimeDisplay = document.getElementById("currentTime");
 
-// Warning modal elements
 const warningModal = document.getElementById("warningModal");
 const selectLocationBtn = document.getElementById("selectLocationBtn");
 const closeWarningBtn = document.getElementById("closeWarningBtn");
 
-// Warning modal functions
 function showWarningModal() {
     warningModal.style.display = "block";
 }
@@ -48,17 +41,13 @@ function hideWarningModal() {
     warningModal.style.display = "none";
 }
 
-// Check if location is selected (not default Delhi coordinates)
 function checkLocationSelected() {
-    // Check if location has been set (not null)
     if (latitude === null || longitude === null) {
         return false;
     }
-    // Check if user manually confirmed a location
     return isLocationSelected;
 }
 
-// Warning modal event listeners
 if (selectLocationBtn) {
     selectLocationBtn.addEventListener("click", () => {
         hideWarningModal();
@@ -70,30 +59,23 @@ if (closeWarningBtn) {
     closeWarningBtn.addEventListener("click", hideWarningModal);
 }
 
-// Close warning modal when clicking outside
 window.addEventListener("click", (event) => {
     if (event.target === warningModal) {
         hideWarningModal();
     }
 });
 
-// Close warning modal with ESC key
 document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && warningModal.style.display === "block") {
         hideWarningModal();
     }
 });
 
-// Update date and time
 function updateDateTime() {
     const now = new Date();
-    
-    // Format date
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const dateStr = now.toLocaleDateString('en-US', options);
     if (currentDateDisplay) currentDateDisplay.textContent = dateStr;
-    
-    // Format time
     const hours = now.getHours();
     const minutes = now.getMinutes();
     const ampm = hours >= 12 ? 'PM' : 'AM';
@@ -102,29 +84,19 @@ function updateDateTime() {
     if (currentTimeDisplay) currentTimeDisplay.textContent = timeStr;
 }
 
-// Update time immediately and then every second
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
-// Debug: Check if elements exist
-console.log('🔍 Search elements check:');
-console.log('  - searchBox:', searchBox);
-console.log('  - searchResults:', document.getElementById("searchResults"));
-
-// Store selected coordinates
 let latitude = null;
 let longitude = null;
 let map, marker;
 let isLocationSelected = false;
 
-// Open map modal
 changeLocationBtn.addEventListener("click", () => {
     mapModal.style.display = "block";
     
-    // Initialize map if not already done
     if (!map) {
         setTimeout(() => {
-            // Use default location if none selected
             const defaultLat = latitude || 28.7041;
             const defaultLon = longitude || 77.1025;
             
@@ -136,43 +108,36 @@ changeLocationBtn.addEventListener("click", () => {
             
             marker = L.marker([defaultLat, defaultLon], {draggable: true}).addTo(map);
             
-            // Update on marker drag
             marker.on('dragend', function() {
                 const pos = marker.getLatLng();
                 updateSelectedLocation(pos.lat, pos.lng);
             });
             
-            // Update on map click
             map.on('click', function(e) {
                 marker.setLatLng(e.latlng);
                 updateSelectedLocation(e.latlng.lat, e.latlng.lng);
             });
         }, 100);
     } else {
-        // Refresh map size
         setTimeout(() => map.invalidateSize(), 100);
     }
 });
 
-// Close modal
 closeModal.addEventListener("click", () => {
     mapModal.style.display = "none";
 });
 
-// Close modal when clicking outside
 window.addEventListener("click", (e) => {
     if (e.target === mapModal) {
         mapModal.style.display = "none";
     }
 });
 
-// Get current location using browser geolocation
 getCurrentLocationBtn.addEventListener("click", () => {
     if (navigator.geolocation) {
         getCurrentLocationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Getting location...';
         getCurrentLocationBtn.disabled = true;
         
-        // Request high accuracy location
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const lat = position.coords.latitude;
@@ -188,7 +153,6 @@ getCurrentLocationBtn.addEventListener("click", () => {
                 getCurrentLocationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Use My Current Location';
                 getCurrentLocationBtn.disabled = false;
                 
-                // Show accuracy info
                 if (accuracy > 100) {
                     alert(`Location found! (Accuracy: ±${Math.round(accuracy)}m)\n\nNote: For better accuracy, ensure location services are enabled and you're using HTTPS.`);
                 }
@@ -216,9 +180,9 @@ getCurrentLocationBtn.addEventListener("click", () => {
                 getCurrentLocationBtn.disabled = false;
             },
             {
-                enableHighAccuracy: true,  // Request GPS if available
-                timeout: 10000,             // Wait up to 10 seconds
-                maximumAge: 0               // Don't use cached position
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
             }
         );
     } else {
@@ -226,7 +190,6 @@ getCurrentLocationBtn.addEventListener("click", () => {
     }
 });
 
-// Search location
 let searchTimeout;
 const searchResults = document.getElementById("searchResults");
 
@@ -256,7 +219,6 @@ searchBox.addEventListener("keypress", (e) => {
     }
 });
 
-// Close search results when clicking outside
 document.addEventListener('click', (e) => {
     if (!searchBox.contains(e.target) && !searchResults.contains(e.target)) {
         searchResults.style.display = 'none';
@@ -267,7 +229,6 @@ async function searchLocation(query) {
     console.log('📡 Searching for:', query);
     
     try {
-        // Using Nominatim with proper headers
         const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=8&addressdetails=1`, {
             headers: {
                 'Accept': 'application/json',
@@ -289,7 +250,6 @@ async function searchLocation(query) {
                 const item = document.createElement('div');
                 item.className = 'search-result-item';
                 
-                // Create a better display with icon
                 item.innerHTML = `
                     <i class="fas fa-map-marker-alt" style="color: #667eea; margin-right: 8px;"></i>
                     <span>${result.display_name}</span>
@@ -301,7 +261,6 @@ async function searchLocation(query) {
                     
                     console.log(`✅ Selected location: ${lat}, ${lon}`);
                     
-                    // Ensure map is initialized
                     if (map) {
                         map.flyTo([lat, lon], 15, {
                             duration: 1.5
@@ -328,7 +287,6 @@ async function searchLocation(query) {
     }
 }
 
-// Update selected location display
 async function updateSelectedLocation(lat, lon, placeName = null) {
     latitude = lat;
     longitude = lon;
@@ -337,7 +295,6 @@ async function updateSelectedLocation(lat, lon, placeName = null) {
     displayLat.textContent = lat.toFixed(5);
     displayLon.textContent = lon.toFixed(5);
     
-    // If place name not provided, do reverse geocoding
     if (!placeName) {
         try {
             const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
@@ -350,9 +307,7 @@ async function updateSelectedLocation(lat, lon, placeName = null) {
     
     selectedLocationText.textContent = placeName;
     
-    // Update home page location display
     if (currentLocationName) {
-        // Extract city/area name from full address
         const parts = placeName.split(',');
         const cityName = parts.length > 2 ? parts.slice(0, 2).join(',') : parts[0];
         currentLocationName.textContent = cityName.trim();
@@ -367,50 +322,38 @@ async function updateSelectedLocation(lat, lon, placeName = null) {
     }
 }
 
-// Confirm location and fetch weather automatically
 confirmLocationBtn.addEventListener("click", async () => {
-    // Mark location as selected
     isLocationSelected = true;
     
-    // Show loading state
     confirmLocationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Fetching weather...';
     confirmLocationBtn.disabled = true;
     
     try {
-        // Fetch current weather
         const currentWeatherURL = `${live_URL}lat=${latitude}&lon=${longitude}&appid=507380f421eff9044c3f63658e1f4fab`;
         let response = await fetch(currentWeatherURL);
         let data = await response.json();
         console.log("Current weather:", data);
         
-        // Update weather display with new function
         updateWeatherDisplay(data);
         
-        // Fetch 12-hour forecast
         const forecastURL = `${base_URL}/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,wind_speed_10m,relative_humidity_2m&timezone=auto`;
         let forecastResponse = await fetch(forecastURL);
         let forecastData = await forecastResponse.json();
         console.log("Forecast data:", forecastData);
         
-        // Get current hour in local time
-        const now = new Date();
-        const currentHour = now.toISOString().slice(0, 13) + ":00";
-        let index = forecastData.hourly.time.indexOf(currentHour);
+        const currentTime = new Date();
+        let index = -1;
         
-        // If exact match not found, find closest future time
-        if (index === -1) {
-            const currentTime = new Date();
-            for (let i = 0; i < forecastData.hourly.time.length; i++) {
-                const forecastTime = new Date(forecastData.hourly.time[i]);
-                if (forecastTime >= currentTime) {
-                    index = i;
-                    break;
-                }
+        for (let i = 0; i < forecastData.hourly.time.length; i++) {
+            const forecastTime = new Date(forecastData.hourly.time[i]);
+            if (forecastTime >= currentTime) {
+                index = i;
+                break;
             }
-            if (index === -1) index = 0; // fallback to start
         }
         
-        // Populate forecast cards
+        if (index === -1) index = 0;
+        
         for (let i = 0; i < 12 && i < forecastCards.length; i++) {
             const cardIndex = index + i;
             
@@ -422,11 +365,9 @@ confirmLocationBtn.addEventListener("click", async () => {
                 const period = hours >= 12 ? 'PM' : 'AM';
                 const displayHour = hours % 12 || 12;
                 
-                // Update time
                 const timeElement = card.querySelector('.forecast-time');
                 timeElement.textContent = `${displayHour}:00 ${period}`;
                 
-                // Update icon based on time of day
                 const iconElement = card.querySelector('.forecast-icon i');
                 if (hours >= 6 && hours < 12) {
                     iconElement.className = 'fas fa-sun';
@@ -442,17 +383,14 @@ confirmLocationBtn.addEventListener("click", async () => {
                     iconElement.style.color = '#e0e7ff';
                 }
                 
-                // Update temperature
                 const tempElement = card.querySelector('.forecast-temp');
                 const temperature = forecastData.hourly.temperature_2m[cardIndex];
                 tempElement.textContent = `${Math.round(temperature)}°C`;
                 
-                // Update humidity
                 const humidElement = card.querySelector('.forecast-humid');
                 const humidity = forecastData.hourly.relative_humidity_2m[cardIndex];
                 humidElement.textContent = `${humidity}%`;
                 
-                // Update wind speed
                 const windElement = card.querySelector('.forecast-wind');
                 const windSpeed = forecastData.hourly.wind_speed_10m[cardIndex];
                 windElement.textContent = `${windSpeed} m/s`;
@@ -461,10 +399,8 @@ confirmLocationBtn.addEventListener("click", async () => {
         
         console.log("✅ Weather and forecast updated successfully!");
         
-        // Close modal
         mapModal.style.display = "none";
         
-        // Reset button
         confirmLocationBtn.innerHTML = 'Confirm Location & Get Weather';
         confirmLocationBtn.disabled = false;
         
@@ -476,7 +412,6 @@ confirmLocationBtn.addEventListener("click", async () => {
     }
 });
 
-// Enter new location button
 btn3.addEventListener("click", (evt) => {
     evt.preventDefault();
     container.classList.remove("hide");
@@ -485,11 +420,9 @@ btn3.addEventListener("click", (evt) => {
     box.classList.remove("box");
 });
 
-// Get Today's Live Weather button
 btn.addEventListener("click", async (event) => {
     event.preventDefault();
 
-    // Check if location is selected
     if (!checkLocationSelected()) {
         showWarningModal();
         return;
@@ -509,19 +442,15 @@ btn.addEventListener("click", async (event) => {
     }
 });
 
-// Function to update weather display with modern cards
 function updateWeatherDisplay(data) {
-    // Temperature
     let temp = data.main.temp - 273.15;
     let t1 = parseFloat(temp.toFixed(1));
     msg_temp.innerHTML = `${t1}<sup>°C</sup>`;
     
-    // Weather description
     const description = data.weather && data.weather[0] ? data.weather[0].description : 'Clear Sky';
     const descElement = document.querySelector('.weather-description');
     if (descElement) descElement.textContent = description;
     
-    // Update large weather icon based on weather condition
     const weatherIconLarge = document.querySelector('.weather-icon-large i');
     if (weatherIconLarge && data.weather && data.weather[0]) {
         const weatherMain = data.weather[0].main.toLowerCase();
@@ -548,22 +477,18 @@ function updateWeatherDisplay(data) {
         }
     }
     
-    // Humidity
     let humid = data.main.humidity;
     msg_humid.innerText = `${humid}%`;
     
-    // Wind speed
     let wind_speed = data.wind.speed;
     msg_wind.innerText = `${wind_speed} km/h`;
     
-    // Feels like temperature
     const feelsLike = document.querySelector('.feels-like');
     if (feelsLike && data.main.feels_like) {
         let feels = data.main.feels_like - 273.15;
         feelsLike.textContent = `${feels.toFixed(1)}°C`;
     }
     
-    // Visibility
     const visibility = document.querySelector('.visibility');
     if (visibility && data.visibility) {
         let visKm = (data.visibility / 1000).toFixed(1);
@@ -571,11 +496,9 @@ function updateWeatherDisplay(data) {
     }
 }
 
-// Get Next 12 hrs weather button
 nextBtn.addEventListener("click", async (evt) => {
     evt.preventDefault();
     
-    // Check if location is selected
     if (!checkLocationSelected()) {
         showWarningModal();
         return;
@@ -592,25 +515,19 @@ nextBtn.addEventListener("click", async (evt) => {
         let data = await response.json();
         console.log(data);
         
-        // Get current hour in local time
-        const now = new Date();
-        const currentHour = now.toISOString().slice(0, 13) + ":00";
-        let index = data.hourly.time.indexOf(currentHour);
+        const currentTime = new Date();
+        let index = -1;
         
-        // If exact match not found, find closest future time
-        if (index === -1) {
-            const currentTime = new Date();
-            for (let i = 0; i < data.hourly.time.length; i++) {
-                const forecastTime = new Date(data.hourly.time[i]);
-                if (forecastTime >= currentTime) {
-                    index = i;
-                    break;
-                }
+        for (let i = 0; i < data.hourly.time.length; i++) {
+            const forecastTime = new Date(data.hourly.time[i]);
+            if (forecastTime >= currentTime) {
+                index = i;
+                break;
             }
-            if (index === -1) index = 0; // fallback to start
         }
         
-        // Populate forecast cards
+        if (index === -1) index = 0;
+        
         for (let i = 0; i < 12 && i < forecastCards.length; i++) {
             const cardIndex = index + i;
             
@@ -622,11 +539,9 @@ nextBtn.addEventListener("click", async (evt) => {
                 const period = hours >= 12 ? 'PM' : 'AM';
                 const displayHour = hours % 12 || 12;
                 
-                // Update time
                 const timeElement = card.querySelector('.forecast-time');
                 timeElement.textContent = `${displayHour}:00 ${period}`;
                 
-                // Update icon based on time of day
                 const iconElement = card.querySelector('.forecast-icon i');
                 if (hours >= 6 && hours < 12) {
                     iconElement.className = 'fas fa-sun';
@@ -642,17 +557,14 @@ nextBtn.addEventListener("click", async (evt) => {
                     iconElement.style.color = '#e0e7ff';
                 }
                 
-                // Update temperature
                 const tempElement = card.querySelector('.forecast-temp');
                 const temperature = data.hourly.temperature_2m[cardIndex];
                 tempElement.textContent = `${Math.round(temperature)}°C`;
                 
-                // Update humidity
                 const humidElement = card.querySelector('.forecast-humid');
                 const humidity = data.hourly.relative_humidity_2m[cardIndex];
                 humidElement.textContent = `${humidity}%`;
                 
-                // Update wind speed
                 const windElement = card.querySelector('.forecast-wind');
                 const windSpeed = data.hourly.wind_speed_10m[cardIndex];
                 windElement.textContent = `${windSpeed} m/s`;
